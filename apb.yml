@@ -1,0 +1,39 @@
+# vim: set filetype=yaml shiftwidth=2 tabstop=2 expandtab smartindent :
+---
+version: 1.0
+name: unifi-controller-apb
+description: Ubiquiti UniFi Controller
+bindable: False
+async: optional
+metadata:
+  displayName: UBNT UniFi Controller (APB)
+  dependencies:
+    - 'docker.io/jacobalberty/unifi'
+plans:
+  - name: Ephemeral
+    description: Deploy UniFi controller with ephemeral storage (testing)
+    free: True
+    default: True
+    metadata:
+      displayName: Ephemeral
+    parameters:
+      - name: external_ip
+        type: string
+        title: External IP of infrastructure node (region=infra, virtual IP)
+        required: true
+  - name: Persistent
+    description: Deploy UniFi controller with persistent storage
+    free: True
+    metadata:
+      displayName: Persistent
+    parameters:
+      - name: external_ip
+        type: string
+        title: External IP of infrastructure node (region=infra, virtual IP)
+        required: true
+      - name: unifi_controller_volume_size
+        type: enum
+        default: '1Gi'
+        enum: ['1Gi', '5Gi', '10Gi']
+        title: UniFi Controller Volume Size
+        required: true

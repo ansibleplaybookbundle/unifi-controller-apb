@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ app_name }}-env
+  namespace: {{ namespace | string }}
+data:
+  BASEDIR: /usr/lib/unifi
+  DATADIR: /unifi/data
+  LOGDIR: /unifi/log
+  CERTDIR: /unifi/cert
+  RUNDIR: /unifi/run
+  ODATADIR: /unifi/var/lib
+  OLOGDIR: /unifi/var/log
+  CERTNAME: cert.pem
+  CERT_PRIVATE_NAME: privkey.pem
+  CERT_IS_CHAIN: "false"
+  GOSU_VERSION: "1.10"
+  BIND_PRIV: "true"
+  RUNAS_UID0: "false"
+  UNIFI_GID: "999"
+  UNIFI_UID: "999"

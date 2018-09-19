@@ -1,0 +1,37 @@
+# vim: set tabstop=2 shiftwidth=2 ft=yaml smartindent expandtab :
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ app_name }}
+    service: {{ app_name }}
+    service_class_id: '{{ _apb_service_class_id }}'
+    plan_id: '{{ _apb_plan_id }}'
+    service_instance_id: '{{ _apb_service_instance_id }}'
+  name: {{ app_name }}
+  namespace: {{ namespace | string }}
+spec:
+  externalIPs:
+    - {{ external_ip }}
+  ports:
+  - name: web
+    port: 8443
+    protocol: TCP
+    targetPort: 8443
+  - name: devcon-comm
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: discovery
+    port: 10001
+    protocol: UDP
+    targetPort: 10001
+  - name: stun
+    port: 3478
+    protocol: UDP
+    targetPort: 3478
+  selector:
+    app: {{ app_name }}
+  type: ClusterIP

@@ -1,0 +1,11 @@
+# vim: set filetype=yaml shiftwidth=2 tabstop=2 expandtab smartindent :
+- name: unifi-controller-apb playbook to deprovision the application
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    apb_action: deprovision
+
+  roles:
+  - role: ansibleplaybookbundle.asb-modules
+  - role: unifi-controller-apb

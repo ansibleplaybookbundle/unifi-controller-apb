@@ -1,0 +1,20 @@
+# vim: ft=yaml shiftwidth=2 tabstop=2 expandtab smartindent :
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ app_name }}-stun
+  namespace: "{{ namespace | string }}"
+  labels:
+    app: {{ app_name }}
+    service: {{ app_name }}
+spec:
+  externalIPs:
+    - {{ external_ip }}
+  port:
+    targetPort: stun
+  to:
+    kind: Service
+    name: {{ app_name }}
+    weight: 100
+  wildcardPolicy: None
